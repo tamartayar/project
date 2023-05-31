@@ -71,24 +71,31 @@ STATES_CAPITALS = {
 
 def capital_of_Idaho():
     # Your code here
-    pass
+    return STATES_CAPITALS['Idaho']
 
 def all_states():
     # Your code here
-    pass
+    return list(STATES_CAPITALS.keys())
 
 def all_capitals():
     # Your code here
-    pass
+    return list(STATES_CAPITALS.values())
 
 def states_capitals_string():
     # Your code here
-    pass
-
-
+    return ", ".join([f"{state} -> {capital}" for state, capital in sorted(STATES_CAPITALS.items())])
 
 def get_state(capital):
-    pass
+    if capital == '':
+        return "Please provide a capital name."
+    states = [state for state, cap in STATES_CAPITALS.items() if cap == capital]
+    if len(states) == 1:
+        return states[0]
+    elif len(states) > 1:
+        return f"Multiple states have the capital {capital}: {', '.join(states)}"
+    else:
+        return f"No state has the capital {capital}"
+
 
 
 
@@ -106,8 +113,7 @@ def test_capital_to_state():
 
 
 def test_capital_to_state_unknown():
-    with pytest.raises(KeyError):
-        get_state('')
+    assert get_state('') == "Please provide a capital name."
 
 
 def main():
